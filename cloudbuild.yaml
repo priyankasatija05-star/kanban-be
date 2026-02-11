@@ -2,46 +2,42 @@ steps:
   # Build backend
   - name: 'gcr.io/cloud-builders/docker'
     args:
-      [
-        'build',
-        '-t',
-        'asia-south1-docker.pkg.dev/$PROJECT_ID/my-repo/backend:latest',
-        '-f',
-        'kanban-BE/Dockerfile',
-        'kanban-BE'
-      ]
+      - 'build'
+      - '-t'
+      - 'asia-south1-docker.pkg.dev/$PROJECT_ID/my-repo/backend:latest'
+      - '-f'
+      - 'kanban-BE/Dockerfile'
+      - 'kanban-BE'
 
   - name: 'gcr.io/cloud-builders/docker'
     args:
-      [
-        'push',
-        'asia-south1-docker.pkg.dev/$PROJECT_ID/my-repo/backend:latest'
-      ]
+      - 'push'
+      - 'asia-south1-docker.pkg.dev/$PROJECT_ID/my-repo/backend:latest'
 
   # Build frontend
   - name: 'gcr.io/cloud-builders/docker'
     args:
-      [
-        'build',
-        '-t',
-        'asia-south1-docker.pkg.dev/$PROJECT_ID/my-repo/frontend:latest',
-        '-f',
-        'kanban/Dockerfile',
-        'kanban'
-      ]
+      - 'build'
+      - '-t'
+      - 'asia-south1-docker.pkg.dev/$PROJECT_ID/my-repo/frontend:latest'
+      - '-f'
+      - 'kanban/Dockerfile'
+      - 'kanban'
 
   - name: 'gcr.io/cloud-builders/docker'
-     args:
-      [
-        'push',
-        'asia-south1-docker.pkg.dev/$PROJECT_ID/my-repo/frontend:latest'
-      ]
+    args:
+      - 'push'
+      - 'asia-south1-docker.pkg.dev/$PROJECT_ID/my-repo/frontend:latest'
 
   # Deploy to GKE
   - name: 'gcr.io/cloud-builders/kubectl'
-    args: ['apply', '-f', 'k8s/']
+    args:
+      - 'apply'
+      - '-f'
+      - 'k8s/'
     env:
       - 'CLOUDSDK_COMPUTE_REGION=asia-south1'
       - 'CLOUDSDK_CONTAINER_CLUSTER=my-gke-cluster'
+
 options:
- logging: CLOUD_LOGGING_ONLY
+  logging: CLOUD_LOGGING_ONLY
