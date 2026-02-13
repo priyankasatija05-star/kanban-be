@@ -5,9 +5,8 @@ steps:
       - 'build'
       - '-t'
       - 'us-central1-docker.pkg.dev/ancient-ship-484917-e5/kanban-be/backend:latest'
-      - '-f'
-      - 'kanban-BE/Dockerfile'
-      - 'kanban-BE'
+      - '.'
+      
 
   - name: 'gcr.io/cloud-builders/docker'
     args:
